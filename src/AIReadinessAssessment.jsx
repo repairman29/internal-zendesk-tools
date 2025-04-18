@@ -160,20 +160,36 @@ const AIReadinessAssessment = () => {
     return currentQuestions.every(q => answers[q.id] !== undefined);
   };
   
-  const goToNextSection = () => {
+  const handleNext = () => {
     if (currentSection < sections.length - 1) {
       setCurrentSection(currentSection + 1);
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 100);
     } else {
-      console.log('Calculating results with answers:', answers);
-      const calculatedResults = calculateResults();
-      console.log('Calculated results:', calculatedResults);
+      calculateResults();
       setShowResults(true);
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 100);
     }
   };
   
-  const goToPreviousSection = () => {
+  const handlePrevious = () => {
     if (currentSection > 0) {
       setCurrentSection(currentSection - 1);
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 100);
     }
   };
   
@@ -347,7 +363,7 @@ const AIReadinessAssessment = () => {
             
             <div className="flex justify-between items-center pt-4">
               <button
-                onClick={goToPreviousSection}
+                onClick={handlePrevious}
                 disabled={currentSection === 0}
                 className={`btn-secondary ${currentSection === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
@@ -355,7 +371,7 @@ const AIReadinessAssessment = () => {
               </button>
               
               <button
-                onClick={goToNextSection}
+                onClick={handleNext}
                 disabled={!isCurrentSectionComplete()}
                 className={`btn-primary ${!isCurrentSectionComplete() ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
