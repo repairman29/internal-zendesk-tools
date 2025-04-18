@@ -1,8 +1,7 @@
-import React from 'react'
-import './index.css' // Import Tailwind styles
-import AIReadinessAssessment from './AIReadinessAssessment' // Import the component (assuming .jsx)
+import './index.css'
+import AIReadinessAssessment from './AIReadinessAssessment.jsx'
 
-function App() {
+const App = () => {
   return (
     <AIReadinessAssessment />
   )
