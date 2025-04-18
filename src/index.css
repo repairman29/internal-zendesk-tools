@@ -2,71 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-coconut text-licorice min-h-screen antialiased;
+  }
+
+  h1 {
+    @apply text-4xl font-bold text-fern mb-6 tracking-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold text-sesame mb-4 tracking-tight;
+  }
+
+  p {
+    @apply text-base leading-relaxed mb-4 text-licorice/90;
+  }
+
+  button {
+    @apply bg-matcha hover:bg-shamrock text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-300 
+           hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-matcha/50;
+  }
+
+  input[type="radio"] {
+    @apply text-shamrock focus:ring-matcha w-5 h-5;
+  }
+
+  label {
+    @apply text-sesame hover:text-fern cursor-pointer transition-colors duration-200;
+  }
+}
+
+/* Modern UI enhancements */
+.card {
+  @apply bg-white p-6 rounded-xl shadow-soft border border-gray-100/50 backdrop-blur-sm;
+}
+
+.section-title {
+  @apply flex items-center space-x-3 mb-6;
+}
+
+.progress-bar {
+  @apply h-2 rounded-full bg-gray-100 overflow-hidden;
+}
+
+.progress-value {
+  @apply h-full bg-shamrock transition-all duration-500 ease-out;
+}
+
+/* Responsive container */
+.container {
+  @apply max-w-4xl mx-auto px-4 py-8;
+}
+
+/* Danish-inspired design elements */
+.assessment-container {
+  @apply min-h-screen bg-gradient-to-b from-coconut to-coconut/80 p-4 md:p-8;
+}
+
+.question-card {
+  @apply bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-soft border border-gray-100/50 
+         hover:shadow-lg transition-all duration-300;
+}
+
+.option-label {
+  @apply flex items-center p-4 rounded-lg transition-all duration-300 cursor-pointer
+         hover:bg-matcha/5 hover:border-matcha/30 border border-gray-200/50;
+}
+
+.option-label.selected {
+  @apply bg-matcha/10 border-matcha shadow-inner;
+}
+
+.results-card {
+  @apply bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-soft border border-gray-100/50;
+}
+
+.score-indicator {
+  @apply h-3 rounded-full bg-gray-100 overflow-hidden;
+}
+
+.score-value {
+  @apply h-full transition-all duration-700 ease-out;
+}
+
+.score-value.high {
+  @apply bg-matcha;
+}
+
+.score-value.medium {
+  @apply bg-pineapple;
+}
+
+.score-value.low {
+  @apply bg-red-400;
+}
+
+.recommendation-card {
+  @apply border-l-4 border-matcha pl-4 py-3 bg-white/50 backdrop-blur-sm rounded-r-lg 
+         hover:bg-white/70 transition-all duration-300;
+}
+
+.navigation-button {
+  @apply py-2.5 px-6 rounded-lg font-medium text-sm transition-all duration-300
+         hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2;
+}
+
+.navigation-button.primary {
+  @apply bg-matcha text-white hover:bg-matcha/90 focus:ring-matcha/50;
+}
+
+.navigation-button.secondary {
+  @apply bg-sesame text-fern hover:bg-sesame/90 focus:ring-sesame/50;
+}
+
+.navigation-button:disabled {
+  @apply bg-gray-200 text-gray-400 cursor-not-allowed hover:shadow-none hover:translate-y-0;
+}
+
+/* Base styles */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

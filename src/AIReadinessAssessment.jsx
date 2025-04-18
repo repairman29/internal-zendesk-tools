@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const AIReadinessAssessment = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -81,12 +81,12 @@ const AIReadinessAssessment = () => {
       questions: [
         {
           id: "zendesk_version",
-          text: "Are you on the latest version of Zendesk products?",
+          text: "Which Zendesk features are currently enabled in your environment?",
           options: [
-            { value: 1, text: "No - Multiple versions behind" },
-            { value: 2, text: "Somewhat - One version behind" },
-            { value: 3, text: "Yes - Current version" },
-            { value: 4, text: "Yes - Current version with beta features enabled" }
+            { value: 1, text: "Basic features only - No advanced capabilities" },
+            { value: 2, text: "Some advanced features - Basic automation and reporting" },
+            { value: 3, text: "Most advanced features - Including automation and analytics" },
+            { value: 4, text: "All features enabled - Including AI and advanced capabilities" }
           ]
         },
         {
@@ -164,6 +164,9 @@ const AIReadinessAssessment = () => {
     if (currentSection < sections.length - 1) {
       setCurrentSection(currentSection + 1);
     } else {
+      console.log('Calculating results with answers:', answers);
+      const calculatedResults = calculateResults();
+      console.log('Calculated results:', calculatedResults);
       setShowResults(true);
     }
   };
@@ -203,149 +206,76 @@ const AIReadinessAssessment = () => {
   };
   
   const getRecommendations = (results) => {
-    const { categoryScores, overallScore } = results;
-    
-    const recommendations = [];
-    
-    // Data recommendations
-    if (categoryScores["Data & Knowledge Foundation"] < 50) {
-      recommendations.push({
-        category: "Data & Knowledge Foundation",
-        actions: [
-          "Conduct a comprehensive knowledge base audit and update",
-          "Implement a data integration strategy across customer touchpoints",
-          "Establish data quality standards and cleansing processes"
-        ]
-      });
-    } else if (categoryScores["Data & Knowledge Foundation"] < 75) {
-      recommendations.push({
-        category: "Data & Knowledge Foundation",
-        actions: [
-          "Fill specific knowledge gaps identified in assessment",
-          "Complete remaining data integration points",
-          "Implement ongoing knowledge management processes"
-        ]
-      });
-    }
-    
-    // Process recommendations
-    if (categoryScores["Process Maturity"] < 50) {
-      recommendations.push({
-        category: "Process Maturity",
-        actions: [
-          "Document key customer service workflows and decision points",
-          "Implement basic automation for routine processes",
-          "Establish core performance metrics and reporting"
-        ]
-      });
-    } else if (categoryScores["Process Maturity"] < 75) {
-      recommendations.push({
-        category: "Process Maturity",
-        actions: [
-          "Enhance workflow documentation with decision trees for edge cases",
-          "Expand automation to more complex scenarios",
-          "Develop advanced analytics for predictive insights"
-        ]
-      });
-    }
-    
-    // Technology recommendations
-    if (categoryScores["Technology Readiness"] < 50) {
-      recommendations.push({
-        category: "Technology Readiness",
-        actions: [
-          "Upgrade to latest Zendesk versions",
-          "Develop basic API integration capabilities",
-          "Allocate dedicated technical resources for implementation"
-        ]
-      });
-    } else if (categoryScores["Technology Readiness"] < 75) {
-      recommendations.push({
-        category: "Technology Readiness",
-        actions: [
-          "Enable beta features for advanced capabilities",
-          "Expand API ecosystem for richer data exchange",
-          "Cross-train additional technical resources"
-        ]
-      });
-    }
-    
-    // Organizational recommendations
-    if (categoryScores["Organizational Readiness"] < 50) {
-      recommendations.push({
-        category: "Organizational Readiness",
-        actions: [
-          "Secure executive sponsorship for AI initiatives",
-          "Develop basic change management approach",
-          "Address staff concerns through education and involvement"
-        ]
-      });
-    } else if (categoryScores["Organizational Readiness"] < 75) {
-      recommendations.push({
-        category: "Organizational Readiness",
-        actions: [
-          "Expand executive involvement to broader leadership team",
-          "Enhance change management with detailed impact analysis",
-          "Create AI champions program among staff"
-        ]
-      });
-    }
-    
-    // If all areas are strong but could use some refinement
-    if (overallScore >= 75 && overallScore < 90) {
-      recommendations.push({
-        category: "Fine-Tuning",
-        actions: [
-          "Conduct advanced AI strategy workshop with leadership",
-          "Develop comprehensive AI governance framework",
-          "Create centers of excellence for knowledge, change management, and technical implementation"
-        ]
-      });
-    }
-    
-    // If organization is highly ready
-    if (overallScore >= 90) {
-      recommendations.push({
-        category: "Advanced Implementation",
-        actions: [
-          "Begin phased implementation of sophisticated AI use cases",
-          "Establish AI innovation lab for ongoing experimentation",
-          "Develop metrics for measuring AI impact on business outcomes"
-        ]
-      });
-    }
-    
+    const recommendations = {
+      "Data & Knowledge Foundation": [
+        "Review and enhance your knowledge base content",
+        "Implement data integration strategies",
+        "Standardize customer data formats"
+      ],
+      "Process Maturity": [
+        "Document key customer service workflows",
+        "Implement basic automation where possible",
+        "Establish performance metrics"
+      ],
+      "Technology Readiness": [
+        "Enable additional Zendesk features based on your needs",
+        "Explore API integration opportunities",
+        "Assess technical resource requirements"
+      ],
+      "Organizational Readiness": [
+        "Secure executive sponsorship",
+        "Develop change management plans",
+        "Provide staff training on new features"
+      ]
+    };
+
     return recommendations;
   };
   
   const getImplementationPath = (score) => {
-    if (score < 40) {
+    if (score < 25) {
       return {
         title: "Foundation Building",
-        description: "Focus on establishing the fundamental building blocks before implementing AI capabilities.",
-        timeline: "6-9 months preparation before initial AI implementation",
-        approach: "Start with knowledge base enhancement and basic chatbots while building broader capabilities."
+        description: "Focus on enabling basic Zendesk features and establishing core processes before implementing AI capabilities.",
+        steps: [
+          "Enable essential Zendesk features",
+          "Document basic workflows",
+          "Establish data standards",
+          "Train staff on core functionality"
+        ]
       };
-    } else if (score < 60) {
+    } else if (score < 50) {
       return {
-        title: "Targeted Implementation",
-        description: "Address specific readiness gaps while implementing AI in well-prepared areas.",
-        timeline: "3-6 months preparation with phased implementation",
-        approach: "Begin with specific use cases in areas of strength while developing capabilities in weaker areas."
+        title: "Feature Expansion",
+        description: "Begin enabling more advanced features while strengthening your foundation.",
+        steps: [
+          "Enable automation features",
+          "Implement basic integrations",
+          "Expand knowledge base",
+          "Train on advanced features"
+        ]
       };
-    } else if (score < 80) {
+    } else if (score < 75) {
       return {
-        title: "Accelerated Adoption",
-        description: "Rapidly implement AI across multiple areas with focused enhancements in specific domains.",
-        timeline: "1-3 months preparation with broad implementation",
-        approach: "Implement multiple AI capabilities simultaneously while addressing minor gaps."
+        title: "Advanced Features",
+        description: "Focus on enabling and utilizing advanced features to prepare for AI implementation.",
+        steps: [
+          "Enable analytics features",
+          "Implement advanced automations",
+          "Optimize workflows",
+          "Prepare for AI features"
+        ]
       };
     } else {
       return {
-        title: "Advanced Implementation",
-        description: "Full-scale implementation with sophisticated use cases and continuous innovation.",
-        timeline: "Immediate implementation with continuous enhancement",
-        approach: "Deploy comprehensive AI strategy across all customer touchpoints with ongoing optimization."
+        title: "AI Readiness",
+        description: "You're ready to enable and implement AI features in your Zendesk environment.",
+        steps: [
+          "Enable AI features",
+          "Implement AI-powered workflows",
+          "Train staff on AI capabilities",
+          "Monitor and optimize AI performance"
+        ]
       };
     }
   };
@@ -354,199 +284,185 @@ const AIReadinessAssessment = () => {
   const recommendations = results ? getRecommendations(results) : [];
   const implementationPath = results ? getImplementationPath(results.overallScore) : null;
   
-  const getCurrentSection = () => {
+  const getCurrentSectionData = () => {
     return sections[currentSection];
   };
   
+  const totalQuestions = sections.reduce((acc, section) => acc + section.questions.length, 0);
+  const completedQuestions = Object.keys(answers).length;
+  
   return (
-    <div className="w-full max-w-4xl mx-auto bg-gray-50 p-6 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-800 mb-2">Zendesk Premier Enterprise</h1>
-      <h2 className="text-xl font-semibold text-blue-600 mb-6">AI Readiness Assessment</h2>
-      
-      {!showResults ? (
-        <div>
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm font-medium text-gray-600">
-                Section {currentSection + 1} of {sections.length}
-              </p>
-              <p className="text-sm font-medium text-gray-600">
-                {Math.round((Object.keys(answers).length / sections.reduce((acc, section) => acc + section.questions.length, 0)) * 100)}% Complete
-              </p>
+    <div className="assessment-container">
+      <div className="container">
+        <h1>Zendesk Premier Enterprise</h1>
+        <h2>AI Readiness Assessment</h2>
+        
+        {!showResults ? (
+          <div className="space-y-8">
+            <div className="card">
+              <div className="section-title">
+                <span className="text-fern font-medium">
+                  Section {currentSection + 1} of {sections.length}: {getCurrentSectionData().title}
+                </span>
+                <span className="text-sm text-sesame">
+                  {Math.round((completedQuestions / totalQuestions) * 100)}% Complete
+                </span>
+              </div>
+              <div className="progress-bar">
+                <div
+                  className="progress-value"
+                  style={{ width: `${(completedQuestions / totalQuestions) * 100}%` }}
+                ></div>
+              </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div 
-                className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
-                style={{ width: `${(currentSection + 1) / sections.length * 100}%` }}
-              ></div>
-            </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              {getCurrentSection().title}
-            </h3>
             
             <div className="space-y-6">
-              {getCurrentSection().questions.map((question) => (
-                <div key={question.id} className="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
-                  <p className="text-gray-700 mb-3">{question.text}</p>
+              {getCurrentSectionData().questions.map((question) => (
+                <div key={question.id} className="question-card">
+                  <p className="text-lg font-medium text-fern mb-4">{question.text}</p>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {question.options.map((option) => (
-                      <label key={option.value} className="flex items-start">
+                      <label 
+                        key={option.value} 
+                        className={`option-label ${answers[question.id] === option.value ? 'selected' : ''}`}
+                      >
                         <input
                           type="radio"
                           name={question.id}
                           value={option.value}
                           checked={answers[question.id] === option.value}
                           onChange={() => handleAnswerSelect(question.id, option.value)}
-                          className="mt-1"
+                          className="mr-3"
                         />
-                        <span className="ml-2 text-gray-600">{option.text}</span>
+                        <span className="text-licorice">{option.text}</span>
                       </label>
                     ))}
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-          
-          <div className="flex justify-between">
-            <button
-              onClick={goToPreviousSection}
-              disabled={currentSection === 0}
-              className={`py-2 px-4 rounded font-medium ${
-                currentSection === 0
-                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              Previous
-            </button>
             
-            <button
-              onClick={goToNextSection}
-              disabled={!isCurrentSectionComplete()}
-              className={`py-2 px-4 rounded font-medium ${
-                isCurrentSectionComplete()
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-blue-300 text-white cursor-not-allowed'
-              }`}
-            >
-              {currentSection < sections.length - 1 ? 'Next' : 'View Results'}
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className="bg-white p-6 rounded-lg shadow mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Your AI Readiness Assessment Results</h3>
-            
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-gray-700 font-medium">Overall Readiness Score</span>
-                <span className="text-lg font-bold text-blue-600">{results.overallScore}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
-                <div 
-                  className={`h-3 rounded-full ${
-                    results.overallScore >= 70 
-                      ? 'bg-green-500' 
-                      : results.overallScore >= 40 
-                      ? 'bg-yellow-500' 
-                      : 'bg-red-500'
-                  }`} 
-                  style={{ width: `${results.overallScore}%` }}
-                ></div>
-              </div>
+            <div className="flex justify-between items-center">
+              <button
+                onClick={goToPreviousSection}
+                disabled={currentSection === 0}
+                className="navigation-button secondary"
+              >
+                Previous
+              </button>
+              
+              <button
+                onClick={goToNextSection}
+                disabled={!isCurrentSectionComplete()}
+                className="navigation-button primary"
+              >
+                {currentSection < sections.length - 1 ? 'Next Section' : 'View Results'}
+              </button>
             </div>
-            
-            <div className="space-y-4 mb-8">
-              {Object.entries(results.categoryScores).map(([category, score]) => (
-                <div key={category}>
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-gray-600">{category}</span>
-                    <span className="text-sm font-medium text-gray-700">{score}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className={`h-2 rounded-full ${
-                        score >= 70 
-                          ? 'bg-green-500' 
-                          : score >= 40 
-                          ? 'bg-yellow-500' 
-                          : 'bg-red-500'
-                      }`} 
-                      style={{ width: `${score}%` }}
-                    ></div>
-                  </div>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            <div className="results-card">
+              <h3 className="text-2xl font-semibold text-fern mb-6">Your AI Readiness Assessment Results</h3>
+              
+              <div className="mb-8">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-fern font-semibold">Overall Readiness Score</span>
+                  <span className="text-2xl font-bold text-fern">{results.overallScore}%</span>
                 </div>
-              ))}
-            </div>
-            
-            <div className="mb-8">
-              <h4 className="text-md font-semibold text-gray-700 mb-3">Recommended Implementation Path</h4>
-              <div className="bg-blue-50 p-4 rounded">
-                <p className="font-semibold text-blue-800">{implementationPath.title}</p>
-                <p className="text-sm text-blue-700 mb-2">{implementationPath.description}</p>
-                <p className="text-sm text-blue-700"><strong>Timeline:</strong> {implementationPath.timeline}</p>
-                <p className="text-sm text-blue-700"><strong>Approach:</strong> {implementationPath.approach}</p>
+                <div className="score-indicator">
+                  <div
+                    className={`score-value ${results.overallScore >= 70 ? 'high' : results.overallScore >= 40 ? 'medium' : 'low'}`}
+                    style={{ width: `${results.overallScore}%` }}
+                  ></div>
+                </div>
               </div>
-            </div>
-            
-            <div>
-              <h4 className="text-md font-semibold text-gray-700 mb-3">Key Recommendations</h4>
-              <div className="space-y-4">
-                {recommendations.map((rec, index) => (
-                  <div key={index} className="border-l-4 border-blue-500 pl-4 py-1">
-                    <p className="font-medium text-gray-700 mb-2">{rec.category}</p>
-                    <ul className="list-disc list-inside space-y-1">
-                      {rec.actions.map((action, idx) => (
-                        <li key={idx} className="text-sm text-gray-600">{action}</li>
-                      ))}
-                    </ul>
+              
+              <div className="space-y-6 mb-8">
+                {Object.entries(results.categoryScores).map(([category, score]) => (
+                  <div key={category}>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-shamrock font-medium">{category}</span>
+                      <span className="font-semibold text-fern">{score}%</span>
+                    </div>
+                    <div className="score-indicator">
+                      <div
+                        className={`score-value ${score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low'}`}
+                        style={{ width: `${score}%` }}
+                      ></div>
+                    </div>
                   </div>
                 ))}
               </div>
+              
+              <div className="mb-8">
+                <h4 className="text-lg font-semibold text-fern mb-4">Recommended Implementation Path</h4>
+                <div className="recommendation-card">
+                  <p className="font-semibold text-shamrock mb-2">{implementationPath.title}</p>
+                  <p className="text-licorice mb-3">{implementationPath.description}</p>
+                  <ul className="list-disc list-inside space-y-1">
+                    {implementationPath.steps.map((step, idx) => (
+                      <li key={idx} className="text-licorice">{step}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-semibold text-fern mb-4">Key Recommendations</h4>
+                <div className="space-y-4">
+                  {Object.entries(recommendations).map(([category, recs], index) => (
+                    <div key={index} className="recommendation-card">
+                      <p className="font-semibold text-shamrock mb-2">{category}</p>
+                      <ul className="list-disc list-inside space-y-1">
+                        {recs.map((rec, idx) => (
+                          <li key={idx} className="text-licorice">{rec}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="card">
+              <h3 className="text-xl font-semibold text-fern mb-4">Next Steps with Zendesk Premier Enterprise</h3>
+              <p className="text-licorice mb-4">
+                Your Technical Account Manager will use these results to develop a customized AI implementation roadmap tailored to your organization's readiness level. This will include:
+              </p>
+              <ul className="list-disc list-inside space-y-2 mb-6 text-licorice">
+                <li>Detailed gap analysis and remediation plan</li>
+                <li>Prioritized AI use case recommendations</li>
+                <li>Timeline for phased implementation</li>
+                <li>Resource planning and change management approach</li>
+                <li>ROI projections and success metrics</li>
+              </ul>
+              <p className="text-sm text-shamrock italic">
+                To schedule a detailed review of your assessment results with a Zendesk AI specialist, please contact your Technical Account Manager.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <button
+                onClick={() => {
+                  setAnswers({});
+                  setCurrentSection(0);
+                  setShowResults(false);
+                }}
+                className="navigation-button secondary"
+              >
+                Retake Assessment
+              </button>
             </div>
           </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Next Steps with Zendesk Premier Enterprise</h3>
-            <p className="text-gray-600 mb-4">
-              Your Technical Account Manager will use these results to develop a customized AI implementation roadmap tailored to your organization's readiness level. This will include:
-            </p>
-            <ul className="list-disc list-inside space-y-2 mb-6">
-              <li className="text-gray-600">Detailed gap analysis and remediation plan</li>
-              <li className="text-gray-600">Prioritized AI use case recommendations</li>
-              <li className="text-gray-600">Timeline for phased implementation</li>
-              <li className="text-gray-600">Resource planning and change management approach</li>
-              <li className="text-gray-600">ROI projections and success metrics</li>
-            </ul>
-            <p className="text-sm text-blue-800 italic">
-              To schedule a detailed review of your assessment results with a Zendesk AI specialist, please contact your Technical Account Manager.
-            </p>
-          </div>
-          
-          <div className="mt-6">
-            <button
-              onClick={() => {
-                setAnswers({});
-                setCurrentSection(0);
-                setShowResults(false);
-              }}
-              className="py-2 px-4 bg-gray-200 text-gray-700 rounded font-medium hover:bg-gray-300"
-            >
-              Retake Assessment
-            </button>
-          </div>
+        )}
+        
+        <div className="card mt-8">
+          <p className="text-sm text-shamrock">
+            <span className="font-semibold">Note:</span> This assessment tool helps identify your organization's readiness for AI implementation. Your Technical Account Manager will work with you to develop a comprehensive strategy based on these insights, ensuring successful implementation of AI capabilities that align with your business objectives.
+          </p>
         </div>
-      )}
-      
-      <div className="mt-6 bg-blue-50 p-4 rounded text-sm text-blue-800">
-        <p className="font-semibold">Note:</p>
-        <p>This assessment tool helps identify your organization's readiness for AI implementation. Your Technical Account Manager will work with you to develop a comprehensive strategy based on these insights, ensuring successful implementation of AI capabilities that align with your business objectives.</p>
       </div>
     </div>
   );
