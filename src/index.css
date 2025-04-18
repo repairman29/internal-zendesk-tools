@@ -4,125 +4,130 @@
 
 @layer base {
   body {
-    @apply bg-coconut text-licorice min-h-screen antialiased;
+    @apply bg-[#1C3528] text-white min-h-screen antialiased;
   }
 
   h1 {
-    @apply text-4xl font-bold text-fern mb-6 tracking-tight;
+    @apply text-5xl font-bold text-white mb-2 tracking-tight;
   }
 
   h2 {
-    @apply text-2xl font-semibold text-sesame mb-4 tracking-tight;
+    @apply text-3xl font-semibold text-[#E7FE54] mb-8 tracking-tight;
   }
 
   p {
-    @apply text-base leading-relaxed mb-4 text-licorice/90;
+    @apply text-base leading-relaxed mb-4 text-gray-200;
   }
 
   button {
-    @apply bg-matcha hover:bg-shamrock text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-300 
-           hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-matcha/50;
+    @apply bg-[#E7FE54] text-[#1C3528] font-medium py-3 px-6 rounded-full transition-all duration-300 
+           hover:shadow-[0_0_20px_rgba(231,254,84,0.3)] hover:-translate-y-0.5 focus:outline-none;
   }
 
   input[type="radio"] {
-    @apply text-shamrock focus:ring-matcha w-5 h-5;
+    @apply text-[#E7FE54] focus:ring-[#E7FE54] w-5 h-5;
   }
 
   label {
-    @apply text-sesame hover:text-fern cursor-pointer transition-colors duration-200;
+    @apply text-gray-200 hover:text-white cursor-pointer transition-colors duration-200;
   }
 }
 
-/* Modern UI enhancements */
+/* Modern UI enhancements with Zendesk style */
 .card {
-  @apply bg-white p-6 rounded-xl shadow-soft border border-gray-100/50 backdrop-blur-sm;
+  @apply bg-[#2A4434]/80 backdrop-blur-lg p-8 rounded-2xl border border-[#E7FE54]/10
+         hover:shadow-[0_0_30px_rgba(231,254,84,0.1)] transition-all duration-300;
 }
 
 .section-title {
-  @apply flex items-center space-x-3 mb-6;
+  @apply flex items-center justify-between mb-6;
 }
 
 .progress-bar {
-  @apply h-2 rounded-full bg-gray-100 overflow-hidden;
+  @apply h-2 rounded-full bg-[#1C3528] overflow-hidden;
 }
 
 .progress-value {
-  @apply h-full bg-shamrock transition-all duration-500 ease-out;
+  @apply h-full bg-[#E7FE54] shadow-[0_0_20px_rgba(231,254,84,0.3)] transition-all duration-500 ease-out;
 }
 
-/* Responsive container */
+/* Responsive container with Zendesk styling */
 .container {
-  @apply max-w-4xl mx-auto px-4 py-8;
+  @apply max-w-5xl mx-auto px-6 py-12;
 }
 
-/* Danish-inspired design elements */
+/* Assessment container with modern design */
 .assessment-container {
-  @apply min-h-screen bg-gradient-to-b from-coconut to-coconut/80 p-4 md:p-8;
+  @apply min-h-screen bg-gradient-to-br from-[#1C3528] to-[#2A4434] p-4 md:p-8;
 }
 
 .question-card {
-  @apply bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-soft border border-gray-100/50 
-         hover:shadow-lg transition-all duration-300;
+  @apply bg-[#2A4434]/80 backdrop-blur-lg p-8 rounded-2xl border border-[#E7FE54]/10
+         hover:shadow-[0_0_30px_rgba(231,254,84,0.1)] transition-all duration-300;
 }
 
 .option-label {
-  @apply flex items-center p-4 rounded-lg transition-all duration-300 cursor-pointer
-         hover:bg-matcha/5 hover:border-matcha/30 border border-gray-200/50;
+  @apply flex items-center p-4 rounded-xl transition-all duration-300 cursor-pointer
+         hover:bg-[#E7FE54]/5 border border-[#E7FE54]/10
+         hover:border-[#E7FE54]/20 hover:shadow-[0_0_20px_rgba(231,254,84,0.1)];
 }
 
 .option-label.selected {
-  @apply bg-matcha/10 border-matcha shadow-inner;
+  @apply bg-[#E7FE54]/10 border-[#E7FE54]/30 shadow-[inset_0_0_20px_rgba(231,254,84,0.1)];
 }
 
 .results-card {
-  @apply bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-soft border border-gray-100/50;
+  @apply bg-[#2A4434]/80 backdrop-blur-lg p-8 rounded-2xl border border-[#E7FE54]/10
+         hover:shadow-[0_0_30px_rgba(231,254,84,0.1)] transition-all duration-300;
 }
 
 .score-indicator {
-  @apply h-3 rounded-full bg-gray-100 overflow-hidden;
+  @apply h-3 rounded-full bg-[#1C3528] overflow-hidden;
 }
 
 .score-value {
-  @apply h-full transition-all duration-700 ease-out;
+  @apply h-full transition-all duration-700 ease-out shadow-[0_0_20px_rgba(231,254,84,0.3)];
 }
 
 .score-value.high {
-  @apply bg-matcha;
+  @apply bg-[#E7FE54];
 }
 
 .score-value.medium {
-  @apply bg-pineapple;
+  @apply bg-[#E7FE54]/70;
 }
 
 .score-value.low {
-  @apply bg-red-400;
+  @apply bg-[#E7FE54]/40;
 }
 
 .recommendation-card {
-  @apply border-l-4 border-matcha pl-4 py-3 bg-white/50 backdrop-blur-sm rounded-r-lg 
-         hover:bg-white/70 transition-all duration-300;
+  @apply border-l-4 border-[#E7FE54] pl-6 py-4 bg-[#2A4434]/50 backdrop-blur-sm rounded-r-xl 
+         hover:bg-[#2A4434]/70 transition-all duration-300
+         hover:shadow-[0_0_20px_rgba(231,254,84,0.1)];
 }
 
 .navigation-button {
-  @apply py-2.5 px-6 rounded-lg font-medium text-sm transition-all duration-300
-         hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2;
+  @apply py-3 px-6 rounded-full font-medium transition-all duration-300
+         hover:shadow-[0_0_20px_rgba(231,254,84,0.3)] focus:outline-none;
 }
 
 .navigation-button.primary {
-  @apply bg-matcha text-white hover:bg-matcha/90 focus:ring-matcha/50;
+  @apply bg-[#E7FE54] text-[#1C3528] hover:bg-[#E7FE54]/90;
 }
 
 .navigation-button.secondary {
-  @apply bg-sesame text-fern hover:bg-sesame/90 focus:ring-sesame/50;
+  @apply bg-[#2A4434] text-[#E7FE54] border border-[#E7FE54]/30 
+         hover:border-[#E7FE54]/50 hover:bg-[#2A4434]/80;
 }
 
 .navigation-button:disabled {
-  @apply bg-gray-200 text-gray-400 cursor-not-allowed hover:shadow-none hover:translate-y-0;
+  @apply bg-gray-600 text-gray-400 cursor-not-allowed hover:shadow-none border-transparent;
 }
 
 /* Base styles */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -140,9 +145,4 @@ body {
 a {
   font-weight: 500;
   text-decoration: inherit;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }

@@ -294,17 +294,19 @@ const AIReadinessAssessment = () => {
   return (
     <div className="assessment-container">
       <div className="container">
-        <h1>Zendesk Premier Enterprise</h1>
-        <h2>AI Readiness Assessment</h2>
+        <div className="mb-12">
+          <h1>Zendesk Premier</h1>
+          <h2>AI Readiness Assessment</h2>
+        </div>
         
         {!showResults ? (
           <div className="space-y-8">
             <div className="card">
               <div className="section-title">
-                <span className="text-fern font-medium">
+                <span className="text-[#E7FE54] text-xl font-medium">
                   Section {currentSection + 1} of {sections.length}: {getCurrentSectionData().title}
                 </span>
-                <span className="text-sm text-sesame">
+                <span className="text-gray-300">
                   {Math.round((completedQuestions / totalQuestions) * 100)}% Complete
                 </span>
               </div>
@@ -319,9 +321,9 @@ const AIReadinessAssessment = () => {
             <div className="space-y-6">
               {getCurrentSectionData().questions.map((question) => (
                 <div key={question.id} className="question-card">
-                  <p className="text-lg font-medium text-fern mb-4">{question.text}</p>
+                  <p className="text-xl font-medium text-[#E7FE54] mb-6">{question.text}</p>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {question.options.map((option) => (
                       <label 
                         key={option.value} 
@@ -333,9 +335,9 @@ const AIReadinessAssessment = () => {
                           value={option.value}
                           checked={answers[question.id] === option.value}
                           onChange={() => handleAnswerSelect(question.id, option.value)}
-                          className="mr-3"
+                          className="mr-4"
                         />
-                        <span className="text-licorice">{option.text}</span>
+                        <span className="text-gray-200 text-lg">{option.text}</span>
                       </label>
                     ))}
                   </div>
@@ -343,13 +345,13 @@ const AIReadinessAssessment = () => {
               ))}
             </div>
             
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center pt-4">
               <button
                 onClick={goToPreviousSection}
                 disabled={currentSection === 0}
                 className="navigation-button secondary"
               >
-                Previous
+                Previous Section
               </button>
               
               <button
@@ -364,12 +366,12 @@ const AIReadinessAssessment = () => {
         ) : (
           <div className="space-y-8">
             <div className="results-card">
-              <h3 className="text-2xl font-semibold text-fern mb-6">Your AI Readiness Assessment Results</h3>
+              <h3 className="text-3xl font-semibold text-[#E7FE54] mb-8">Your AI Readiness Results</h3>
               
-              <div className="mb-8">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-fern font-semibold">Overall Readiness Score</span>
-                  <span className="text-2xl font-bold text-fern">{results.overallScore}%</span>
+              <div className="mb-12">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-2xl text-white font-medium">Overall Readiness Score</span>
+                  <span className="text-4xl font-bold text-[#E7FE54]">{results.overallScore}%</span>
                 </div>
                 <div className="score-indicator">
                   <div
@@ -379,12 +381,12 @@ const AIReadinessAssessment = () => {
                 </div>
               </div>
               
-              <div className="space-y-6 mb-8">
+              <div className="space-y-8 mb-12">
                 {Object.entries(results.categoryScores).map(([category, score]) => (
                   <div key={category}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-shamrock font-medium">{category}</span>
-                      <span className="font-semibold text-fern">{score}%</span>
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-xl text-[#E7FE54] font-medium">{category}</span>
+                      <span className="text-2xl font-semibold text-white">{score}%</span>
                     </div>
                     <div className="score-indicator">
                       <div
@@ -396,28 +398,34 @@ const AIReadinessAssessment = () => {
                 ))}
               </div>
               
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-fern mb-4">Recommended Implementation Path</h4>
+              <div className="mb-12">
+                <h4 className="text-2xl font-semibold text-[#E7FE54] mb-6">Implementation Path</h4>
                 <div className="recommendation-card">
-                  <p className="font-semibold text-shamrock mb-2">{implementationPath.title}</p>
-                  <p className="text-licorice mb-3">{implementationPath.description}</p>
-                  <ul className="list-disc list-inside space-y-1">
+                  <p className="text-xl font-semibold text-[#E7FE54] mb-4">{implementationPath.title}</p>
+                  <p className="text-gray-200 mb-6">{implementationPath.description}</p>
+                  <ul className="space-y-3">
                     {implementationPath.steps.map((step, idx) => (
-                      <li key={idx} className="text-licorice">{step}</li>
+                      <li key={idx} className="text-gray-200 flex items-center">
+                        <span className="text-[#E7FE54] mr-3">•</span>
+                        {step}
+                      </li>
                     ))}
                   </ul>
                 </div>
               </div>
               
               <div>
-                <h4 className="text-lg font-semibold text-fern mb-4">Key Recommendations</h4>
-                <div className="space-y-4">
+                <h4 className="text-2xl font-semibold text-[#E7FE54] mb-6">Key Recommendations</h4>
+                <div className="space-y-6">
                   {Object.entries(recommendations).map(([category, recs], index) => (
                     <div key={index} className="recommendation-card">
-                      <p className="font-semibold text-shamrock mb-2">{category}</p>
-                      <ul className="list-disc list-inside space-y-1">
+                      <p className="text-xl font-semibold text-[#E7FE54] mb-4">{category}</p>
+                      <ul className="space-y-3">
                         {recs.map((rec, idx) => (
-                          <li key={idx} className="text-licorice">{rec}</li>
+                          <li key={idx} className="text-gray-200 flex items-center">
+                            <span className="text-[#E7FE54] mr-3">•</span>
+                            {rec}
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -427,23 +435,30 @@ const AIReadinessAssessment = () => {
             </div>
             
             <div className="card">
-              <h3 className="text-xl font-semibold text-fern mb-4">Next Steps with Zendesk Premier Enterprise</h3>
-              <p className="text-licorice mb-4">
+              <h3 className="text-2xl font-semibold text-[#E7FE54] mb-6">Next Steps with Zendesk Premier</h3>
+              <p className="text-gray-200 mb-6">
                 Your Technical Account Manager will use these results to develop a customized AI implementation roadmap tailored to your organization's readiness level. This will include:
               </p>
-              <ul className="list-disc list-inside space-y-2 mb-6 text-licorice">
-                <li>Detailed gap analysis and remediation plan</li>
-                <li>Prioritized AI use case recommendations</li>
-                <li>Timeline for phased implementation</li>
-                <li>Resource planning and change management approach</li>
-                <li>ROI projections and success metrics</li>
+              <ul className="space-y-4 mb-8">
+                {[
+                  'Detailed gap analysis and remediation plan',
+                  'Prioritized AI use case recommendations',
+                  'Timeline for phased implementation',
+                  'Resource planning and change management approach',
+                  'ROI projections and success metrics'
+                ].map((item, idx) => (
+                  <li key={idx} className="text-gray-200 flex items-center">
+                    <span className="text-[#E7FE54] mr-3">•</span>
+                    {item}
+                  </li>
+                ))}
               </ul>
-              <p className="text-sm text-shamrock italic">
+              <p className="text-[#E7FE54] text-sm italic">
                 To schedule a detailed review of your assessment results with a Zendesk AI specialist, please contact your Technical Account Manager.
               </p>
             </div>
             
-            <div className="text-center">
+            <div className="text-center pt-4">
               <button
                 onClick={() => {
                   setAnswers({});
@@ -457,12 +472,6 @@ const AIReadinessAssessment = () => {
             </div>
           </div>
         )}
-        
-        <div className="card mt-8">
-          <p className="text-sm text-shamrock">
-            <span className="font-semibold">Note:</span> This assessment tool helps identify your organization's readiness for AI implementation. Your Technical Account Manager will work with you to develop a comprehensive strategy based on these insights, ensuring successful implementation of AI capabilities that align with your business objectives.
-          </p>
-        </div>
       </div>
     </div>
   );
