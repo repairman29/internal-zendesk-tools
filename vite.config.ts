@@ -46,5 +46,6 @@ export default defineConfig({
         '**/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}',
       ],
     },
-  }
+  },
+  base: '/internal-zendesk-tools/',
 }) 
