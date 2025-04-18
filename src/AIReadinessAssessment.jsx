@@ -292,27 +292,27 @@ const AIReadinessAssessment = () => {
   const completedQuestions = Object.keys(answers).length;
   
   return (
-    <div className="assessment-container">
-      <div className="container">
-        <div className="mb-12">
+    <div className="min-h-screen py-8 px-4">
+      <div className="assessment-container">
+        <div className="mb-8 text-center">
           <h1>Zendesk Premier</h1>
           <h2>AI Readiness Assessment</h2>
         </div>
         
         {!showResults ? (
           <div className="space-y-8">
-            <div className="card">
-              <div className="section-title">
-                <span className="text-[#E7FE54] text-xl font-medium">
+            <div className="results-section">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-xl font-medium text-matcha">
                   Section {currentSection + 1} of {sections.length}: {getCurrentSectionData().title}
                 </span>
-                <span className="text-gray-300">
+                <span className="text-matcha">
                   {Math.round((completedQuestions / totalQuestions) * 100)}% Complete
                 </span>
               </div>
               <div className="progress-bar">
                 <div
-                  className="progress-value"
+                  className="progress-fill"
                   style={{ width: `${(completedQuestions / totalQuestions) * 100}%` }}
                 ></div>
               </div>
@@ -321,7 +321,7 @@ const AIReadinessAssessment = () => {
             <div className="space-y-6">
               {getCurrentSectionData().questions.map((question) => (
                 <div key={question.id} className="question-card">
-                  <p className="text-xl font-medium text-[#E7FE54] mb-6">{question.text}</p>
+                  <p className="text-xl font-medium text-matcha mb-6">{question.text}</p>
                   
                   <div className="space-y-4">
                     {question.options.map((option) => (
@@ -337,7 +337,7 @@ const AIReadinessAssessment = () => {
                           onChange={() => handleAnswerSelect(question.id, option.value)}
                           className="mr-4"
                         />
-                        <span className="text-gray-200 text-lg">{option.text}</span>
+                        <span className="text-lg">{option.text}</span>
                       </label>
                     ))}
                   </div>
@@ -349,7 +349,7 @@ const AIReadinessAssessment = () => {
               <button
                 onClick={goToPreviousSection}
                 disabled={currentSection === 0}
-                className="navigation-button secondary"
+                className={`btn-secondary ${currentSection === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 Previous Section
               </button>
@@ -357,7 +357,7 @@ const AIReadinessAssessment = () => {
               <button
                 onClick={goToNextSection}
                 disabled={!isCurrentSectionComplete()}
-                className="navigation-button primary"
+                className={`btn-primary ${!isCurrentSectionComplete() ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {currentSection < sections.length - 1 ? 'Next Section' : 'View Results'}
               </button>
@@ -365,17 +365,17 @@ const AIReadinessAssessment = () => {
           </div>
         ) : (
           <div className="space-y-8">
-            <div className="results-card">
-              <h3 className="text-3xl font-semibold text-[#E7FE54] mb-8">Your AI Readiness Results</h3>
+            <div className="results-section">
+              <h3>Your AI Readiness Results</h3>
               
               <div className="mb-12">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-2xl text-white font-medium">Overall Readiness Score</span>
-                  <span className="text-4xl font-bold text-[#E7FE54]">{results.overallScore}%</span>
+                <div className="score-display">
+                  <span className="text-2xl font-medium">Overall Readiness Score</span>
+                  <span className="text-4xl font-bold text-matcha">{results.overallScore}%</span>
                 </div>
-                <div className="score-indicator">
+                <div className="progress-bar mt-4">
                   <div
-                    className={`score-value ${results.overallScore >= 70 ? 'high' : results.overallScore >= 40 ? 'medium' : 'low'}`}
+                    className="progress-fill"
                     style={{ width: `${results.overallScore}%` }}
                   ></div>
                 </div>
@@ -384,13 +384,13 @@ const AIReadinessAssessment = () => {
               <div className="space-y-8 mb-12">
                 {Object.entries(results.categoryScores).map(([category, score]) => (
                   <div key={category}>
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="text-xl text-[#E7FE54] font-medium">{category}</span>
-                      <span className="text-2xl font-semibold text-white">{score}%</span>
+                    <div className="score-display">
+                      <span className="text-xl font-medium">{category}</span>
+                      <span className="text-2xl font-semibold text-matcha">{score}%</span>
                     </div>
-                    <div className="score-indicator">
+                    <div className="progress-bar mt-2">
                       <div
-                        className={`score-value ${score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low'}`}
+                        className="progress-fill"
                         style={{ width: `${score}%` }}
                       ></div>
                     </div>
@@ -399,14 +399,14 @@ const AIReadinessAssessment = () => {
               </div>
               
               <div className="mb-12">
-                <h4 className="text-2xl font-semibold text-[#E7FE54] mb-6">Implementation Path</h4>
+                <h4>Implementation Path</h4>
                 <div className="recommendation-card">
-                  <p className="text-xl font-semibold text-[#E7FE54] mb-4">{implementationPath.title}</p>
-                  <p className="text-gray-200 mb-6">{implementationPath.description}</p>
+                  <p className="text-xl font-semibold text-matcha mb-4">{implementationPath.title}</p>
+                  <p className="mb-6">{implementationPath.description}</p>
                   <ul className="space-y-3">
                     {implementationPath.steps.map((step, idx) => (
-                      <li key={idx} className="text-gray-200 flex items-center">
-                        <span className="text-[#E7FE54] mr-3">•</span>
+                      <li key={idx} className="flex items-center">
+                        <span className="text-matcha mr-3">•</span>
                         {step}
                       </li>
                     ))}
@@ -415,15 +415,15 @@ const AIReadinessAssessment = () => {
               </div>
               
               <div>
-                <h4 className="text-2xl font-semibold text-[#E7FE54] mb-6">Key Recommendations</h4>
+                <h4>Key Recommendations</h4>
                 <div className="space-y-6">
                   {Object.entries(recommendations).map(([category, recs], index) => (
                     <div key={index} className="recommendation-card">
-                      <p className="text-xl font-semibold text-[#E7FE54] mb-4">{category}</p>
+                      <p className="text-xl font-semibold text-matcha mb-4">{category}</p>
                       <ul className="space-y-3">
                         {recs.map((rec, idx) => (
-                          <li key={idx} className="text-gray-200 flex items-center">
-                            <span className="text-[#E7FE54] mr-3">•</span>
+                          <li key={idx} className="flex items-center">
+                            <span className="text-matcha mr-3">•</span>
                             {rec}
                           </li>
                         ))}
@@ -434,9 +434,9 @@ const AIReadinessAssessment = () => {
               </div>
             </div>
             
-            <div className="card">
-              <h3 className="text-2xl font-semibold text-[#E7FE54] mb-6">Next Steps with Zendesk Premier</h3>
-              <p className="text-gray-200 mb-6">
+            <div className="results-section">
+              <h4>Next Steps with Zendesk Premier</h4>
+              <p className="mb-6">
                 Your Technical Account Manager will use these results to develop a customized AI implementation roadmap tailored to your organization's readiness level. This will include:
               </p>
               <ul className="space-y-4 mb-8">
@@ -447,13 +447,13 @@ const AIReadinessAssessment = () => {
                   'Resource planning and change management approach',
                   'ROI projections and success metrics'
                 ].map((item, idx) => (
-                  <li key={idx} className="text-gray-200 flex items-center">
-                    <span className="text-[#E7FE54] mr-3">•</span>
+                  <li key={idx} className="flex items-center">
+                    <span className="text-matcha mr-3">•</span>
                     {item}
                   </li>
                 ))}
               </ul>
-              <p className="text-[#E7FE54] text-sm italic">
+              <p className="text-matcha text-sm italic">
                 To schedule a detailed review of your assessment results with a Zendesk AI specialist, please contact your Technical Account Manager.
               </p>
             </div>
@@ -465,7 +465,7 @@ const AIReadinessAssessment = () => {
                   setCurrentSection(0);
                   setShowResults(false);
                 }}
-                className="navigation-button secondary"
+                className="btn-secondary"
               >
                 Retake Assessment
               </button>

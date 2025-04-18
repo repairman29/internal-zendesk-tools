@@ -1,96 +1,91 @@
-# AI Readiness Assessment Tool
+# Zendesk AI Readiness Assessment Tool
 
-A web-based assessment tool to help organizations evaluate their readiness for AI implementation, with a specific focus on Zendesk integration capabilities.
-
-## Project Goals
-
-- Provide a comprehensive assessment of an organization's AI readiness
-- Focus on Zendesk-specific features and capabilities
-- Generate actionable insights and recommendations
-- Offer a clear implementation path based on assessment results
+A sophisticated assessment tool designed to help organizations evaluate their readiness for AI implementation within their Zendesk environment. Built with React, TypeScript, and Tailwind CSS, featuring a modern, animated UI with a professional matcha-themed design.
 
 ## Features
 
-- Interactive questionnaire covering multiple readiness dimensions
-- Real-time scoring and evaluation
-- Customized recommendations based on responses
-- Mobile-responsive design
-- Standalone HTML version available
-- React-based web application version
+- Interactive questionnaire with four key assessment areas
+- Real-time progress tracking
+- Sophisticated scoring system
+- Detailed results analysis
+- Custom implementation path recommendations
+- Animated UI components
+- Responsive design
+- Dark mode with matcha accents
 
-## Technical Standards
+## Tech Stack
 
-- Modern React with TypeScript for type safety
-- Vite for fast development and optimized builds
-- Tailwind CSS for styling
-- ESLint and Prettier for code quality
-- Responsive design principles
-- Accessibility compliance
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- PostCSS
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16.x or higher
+- npm 7.x or higher
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/internal-zendesk-tools.git
+cd internal-zendesk-tools
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://127.0.0.1:5173/internal-zendesk-tools/`
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
 
 ## Project Structure
 
 ```
 ai-readiness-app/
-├── src/                    # Source code
-│   ├── components/        # React components
-│   ├── styles/           # CSS and Tailwind styles
-│   └── assets/          # Static assets
-├── public/               # Public assets
-├── index.html           # Entry HTML file
-├── vite.config.js       # Vite configuration
-├── postcss.config.js    # PostCSS configuration
-├── tailwind.config.js   # Tailwind CSS configuration
-└── package.json         # Project dependencies
+├── src/
+│   ├── components/
+│   │   └── AIReadinessAssessment.jsx
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── public/
+├── index.html
+├── vite.config.js
+├── tailwind.config.js
+└── postcss.config.js
 ```
 
-## Requirements
+## Deployment
 
-- Node.js >= 18.0.0
-- npm >= 9.0.0
+This project is configured for deployment to GitHub Pages. The production version is available at:
+https://repairman29.github.io/internal-zendesk-tools/
 
-## Dependencies
+## Contributing
 
-Main dependencies:
-- react: ^18.2.0
-- react-dom: ^18.2.0
-- tailwindcss: ^3.4.1
-- vite: ^5.1.4
-- @vitejs/plugin-react: ^4.2.1
-- postcss: ^8.4.35
-- autoprefixer: ^10.4.17
-
-## Setup and Installation
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start development server:
-   ```bash
-   npm run dev
-   ```
-4. Build for production:
-   ```bash
-   npm run build
-   ```
-
-## Development Guidelines
-
-- Follow React best practices and hooks patterns
-- Use TypeScript for all new components
-- Style components using Tailwind CSS utility classes
-- Maintain mobile-first responsive design
-- Write meaningful commit messages
-- Keep components modular and reusable
-
-## Browser Support
-
-- Chrome (latest 2 versions)
-- Firefox (latest 2 versions)
-- Safari (latest 2 versions)
-- Edge (latest 2 versions)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-MIT License 
+Internal use only - Zendesk Premier Enterprise 
